@@ -5,6 +5,7 @@
 
 {% block content %}
 
+{% static 'hospital/style.css' %}
 
 <head>
   <style media="screen">
@@ -59,14 +60,15 @@
   <h3>Emergency ?</h3>
 
   <p class="lead">
-    <a class="btn btn-danger btn-lg" href="/patientclick" role="button">Take Appointment Now!</a>
+    <a class="btn btn-danger btn-lg" href="/patientclick" role="button">Take Appointment
+      Now!</a>
   </p>
   <br><br>
 </div>
 
 <br><br><br><br>
 
-{% include "hospital/admin_doctor_patient_card.html" %}
+<!-- include "hospital/admin_doctor_patient_card.html -->
 <br><br><br>
 
 
