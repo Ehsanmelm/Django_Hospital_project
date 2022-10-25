@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<!-- {% load widget_tweaks  -->
+{% load widget_tweaks %}
 <html lang="en" dir="ltr">
 
 <head>
@@ -61,65 +61,64 @@
 
 
 
-  <!--- signup page for doctor by admin(sumit)  ---------->
-  <form method="post" enctype="multipart/form-data">
+  <!--- signup page for patient by admin(sumit)  ---------->
+  <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container register-form">
       <div class="form">
         <div class="note">
-          <p>Register In Hospital</p>
+          <p>Register to Hospital</p>
         </div>
 
         <div class="form-content">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <!-- render_field userForm.first_name class="form-control" placeholder="First Name" %} -->
-              </div>
-              <div class="form-group">
                 {% for i in form%}
-                {{i.label_tag}}
                 {{i}}
-                <br>
-                {% endfor%}
-                <!-- render_field userForm.username class="form-control" placeholder="Username" %} -->
+                {{i.label_tags}}
+              </div>
+              <!-- {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
               </div>
               <div class="form-group">
-                <!-- render_field doctorForm.department class="form-control" placeholder="Department" %} -->
+                {% render_field userForm.username class="form-control" placeholder="Username" %}
               </div>
               <div class="form-group">
-                <!-- render_field doctorForm.address class="form-control" placeholder="Address" %} -->
+                {% render_field patientForm.address class="form-control" placeholder="Address" %}
               </div>
-
+              <div class="form-group">
+                {% render_field patientForm.symptoms class="form-control" placeholder="Symptoms" %}
+              </div>
+              <div class="form-group">
+                {% render_field patientForm.profile_pic required="required" class="form-control" placeholder="Profile Picture" %}
+              </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <!-- render_field userForm.last_name class="form-control" placeholder="Last Name" %} -->
+                {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
               </div>
               <div class="form-group">
-                <!-- render_field userForm.password class="form-control" placeholder="Password" %} -->
+                {% render_field userForm.password class="form-control" placeholder="Password" %}
               </div>
               <div class="form-group">
-                <!-- render_field doctorForm.mobile class="form-control" placeholder="Contact" %} -->
+                {% render_field patientForm.mobile class="form-control" pattern="[6789][0-9]{9}" placeholder="Contact Number" %}
               </div>
               <div class="form-group">
-                <!-- render_field doctorForm.profile_pic required="required" class="form-control" placeholder="Profile -->
-                <!-- Picture" %} -->
-              </div>
+                {% render_field patientForm.assignedDoctorId class="form-control" placeholder="Doctor" %}
+              </div> -->
 
+              <!-- </div> -->
             </div>
+            <h2 style="text-align:center; color: #aa082e;">{{msg}}</h2>
+            <button type="submit" class="btnSubmit">Register</button>
+            <div class="text-center">Already have an account? <a href="patientlogin">Login here</a></div>
           </div>
-          <h2 style="text-align:center; color: #aa082e;">{{msg}}</h2>
-
-          <button type="submit" class="btnSubmit">Register</button>
-          <div class="text-center">Already have an account? <a href="{% url 'doctor_login'%}">Login here</a></div>
         </div>
       </div>
-    </div>
 
   </form>
 
-  <!-- {% include "hospital/footer.html"  -->
+  {% include "hospital/footer.html" %}
 </body>
 
 

@@ -9,7 +9,7 @@ class DockAmin(admin.ModelAdmin):
 
 
 class patientAmin(admin.ModelAdmin):
-    list_display = ["Patient_name", "status"]
+    list_display = ["Patient_name", "is_accepted"]
 
 
 admin.site.register(DoctorModel, DockAmin)
