@@ -29,11 +29,11 @@ class DoctorModel(models.Model):
 
 
 class PatientModel(models.Model):
-    Patient_name = models.CharField(max_length=255)
+    patient_name = models.CharField(max_length=255)
     password = models.CharField(max_length=255, default="")
     email = models.EmailField(unique=True, default="")
     doctor = models.ForeignKey(
-        DoctorModel, on_delete=models.CASCADE, default="")
+        DoctorModel, on_delete=models.CASCADE, default="", null=True)
     profile_pic = models.ImageField(
         upload_to='upload/Patinet_Profile', null=True, blank=True)
     address = models.CharField(max_length=40)
@@ -41,3 +41,19 @@ class PatientModel(models.Model):
     symptoms = models.CharField(max_length=100, null=False)
     # assignedDoctorId = models.DateField(null=True)
     is_accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.patient_name}   {self.password}"
+
+
+class AppointmentModel(models.Model):
+    patient_name = models.CharField(max_length=255, null=True)
+    doctor_name = models.CharField(max_length=255, null=True)
+    patient_pass = models.CharField(max_length=255, null=True)
+    doctor_pass = models.CharField(max_length=255, null=True)
+    description = models.TextField(null=True)
+    date = models.DateField()
+    status = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return f"{self.patient_name} {self.doctor_name}"

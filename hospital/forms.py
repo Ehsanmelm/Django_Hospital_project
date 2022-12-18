@@ -1,5 +1,6 @@
+from dataclasses import fields
 from django import forms
-from .models import PatientModel, DoctorModel
+from .models import PatientModel, DoctorModel, AppointmentModel
 
 # ------------ doctor related forms-------------
 
@@ -24,4 +25,24 @@ class DoctorLoginForm(forms.ModelForm):
 class PatientSigninForm(forms.ModelForm):
     class Meta:
         model = PatientModel
-        fields = ["doctor", "is_accepted"]
+        fields = '__all__'
+        exclude = ["doctor", "is_accepted"]
+
+
+class PatientLoginForm(forms.ModelForm):
+    class Meta:
+        model = PatientModel
+        fields = ["patient_name", "password"]
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
+class BookAppointmentForm(forms.ModelForm):
+    class Meta:
+        model = AppointmentModel
+        fields = ['description', 'date']
+        widgets = {
+            'date': DateInput()
+        }

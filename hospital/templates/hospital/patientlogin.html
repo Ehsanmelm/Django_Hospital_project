@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load widget_tweaks %}
 <html lang="en" dir="ltr">
 
 <head>
@@ -58,7 +57,7 @@
   <br><br>
 
   <!--- login page for patient by admin(sumit)  ---------->
-  <form method="post">
+  <form method="POST">
     {% csrf_token %}
     <div class="container register-form">
       <div class="form">
@@ -71,20 +70,24 @@
             <div class="col-md-6">
 
               <div class="form-group">
-                {% render_field form.username class="form-control" placeholder="Username" %}
+                <!-- {% render_field form.username class="form-control" placeholder="Username"  -->
               </div>
 
             </div>
             <div class="col-md-6">
-
               <div class="form-group">
-                {% render_field form.password class="form-control" placeholder="Password" %}
+                {% for i in form%}
+                {{i.label_tag}}
+                {{i}}
+                <br>
+                {%endfor%}
+                <!-- {% render_field form.password class="form-control" placeholder="Password"  -->
               </div>
 
             </div>
           </div>
           <button type="submit" class="btnSubmit">Login</button>
-          <div class="text-center">Do not have account? <a href="patientsignup">Signup here</a></div>
+          <div class="text-center">Do not have account? <a href="{% url 'patient_signin' %}">Signup here</a></div>
         </div>
       </div>
     </div>
@@ -92,9 +95,9 @@
   </form>
 
   <br><br><br>
-  
 
-  {% include "hospital/footer.html" %}
+
+  <!-- {% include "hospital/footer.html"  -->
 </body>
 
 </html>
