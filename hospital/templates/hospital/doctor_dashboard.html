@@ -17,18 +17,17 @@
             <th>Picture</th>
             <th>Description</th>
             <th>Contact</th>
-            <th>Address</th>
             <th>Date</th>
           </tr>
         </thead>
-        {% for a,p in appointments %}
+        {% for a,p in appointment %}
         <tr>
-          <td>{{a.patientName}}</td>
-          <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+          <td>{{a.patient_name}}</td>
+          <!-- <td> <img src=" static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td> -->
           <td>{{a.description}}</td>
           <td>{{p.mobile}}</td>
           <td>{{p.address}}</td>
-          <td>{{a.appointmentDate}}</td>
+          <td>{{a.date}}</td>
         </tr>
         {% endfor %}
       </table>

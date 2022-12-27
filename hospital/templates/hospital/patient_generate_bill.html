@@ -1,4 +1,4 @@
-{% extends 'hospital/patient_base.html' %}
+{% extends 'hospital/doctor_base.html' %}
 {% load static %}
 {% block content %}
 
@@ -102,17 +102,10 @@
     .menu {
       top: 50px;
     }
-
-    .download {
-      text-align: center;
-      display: block;
-    }
   </style>
 </head>
 
 <br><br><br>
-
-{%if is_discharged%}
 <div class="invoice-box">
   <table cellpadding="0" cellspacing="0">
     <tr class="top">
@@ -125,7 +118,9 @@
 
             <td>
 
-              Admit Date: {{Bill.admitdate}}<br>
+              <!-- Admit Date: {{contex.admitDate}}<br> -->
+              Release Date:
+              <br> {{discharge_form.todaydate}}<br>
             </td>
           </tr>
         </table>
@@ -137,14 +132,14 @@
         <table>
           <tr>
             <td>
-              Patient Name : {{Bill.patient_name}}<br>
-              Patient Contact : {{Bill.mobile}}<br>
-              Patient Addres : {{Bill.address}}<br>
+              Patient Name : {{discharge_form.patient_name}}<br>
+              Patient Contact : {{discharge_form.mobile}}<br>
+              Patient Addres : {{discharge_form.address}}<br>
             </td>
 
             <td>
               Doctor Name :<br>
-              {{Bill.assigned_doctor_name}}<br>
+              {{discharge_form.assigned_doctor_name}}<br>
 
             </td>
           </tr>
@@ -164,7 +159,7 @@
 
     <tr class="details">
       <td>
-        {{Bill.symptoms}}
+        {{discharge_form.symptoms}}
       </td>
     </tr>
     <tr class="heading">
@@ -176,69 +171,60 @@
         Price
       </td>
     </tr>
+    <form method="post">
+      {% csrf_token %}
 
-    <tr class="item">
-      <td>
-        Room Charge of {{daySpent}} Days
-      </td>
+      <tr class="item">
+        <td>
+          Room Charge (Per Day)
+        </td>
 
-      <td>
-        {{Bill.roomCharge}}
-      </td>
-    </tr>
+        <td>
+          <input type="number" name="roomCharge" placeholder="In Dollars" value="">
+        </td>
+      </tr>
 
-    <tr class="item">
-      <td>
-        Doctor Fee
-      </td>
+      <tr class="item">
+        <td>
+          Doctor Fee
+        </td>
 
-      <td>
-        {{Bill.doctorFee}}
-      </td>
-    </tr>
+        <td>
+          <input type="number" name="doctorFee" placeholder="In Dollars" value="">
+        </td>
+      </tr>
 
-    <tr class="item">
-      <td>
-        Medicine Cost
-      </td>
+      <tr class="item">
+        <td>
+          Medicine Cost
+        </td>
 
-      <td>
-        {{Bill.medicineCost}}
-      </td>
-    </tr>
+        <td>
+          <input type="number" name="medicineCost" placeholder="In Dollars" value="">
+        </td>
+      </tr>
 
-    <tr class="item last">
-      <td>
-        Other Charge
-      </td>
+      <tr class="item last">
+        <td>
+          Other Charge
+        </td>
 
-      <td>
-        {{Bill.OtherCharge}}
-      </td>
-    </tr>
+        <td>
+          <input type="number" name="OtherCharge" placeholder="In Dollars" value="">
+        </td>
+      </tr>
 
-    <tr class="total">
-      <td></td>
+      <tr class="total">
+        <td></td>
 
-      <td>
-        Total : {{Bill.total_price}}
-      </td>
-    </tr>
+        <td>
+          <input type="submit" name="submit" value="Generate Bill">
+        </td>
+      </tr>
 
+    </form>
   </table>
 </div>
-<br><br>
-<div class="download">
-  <!-- <a style="background:red; width:500px;" href=" url '' patientId  %}">Download</a> -->
-</div>
 
 
-
-{%else%}
-<h5 style="text-align:center;">You Are Not Discharged By Hospital !</h5>
-<br><br>
-<h6 style="text-align:center;">You Can Download Invoice after getting discharged.</h6>
-{%endif%}
-
-<br><br><br><br><br><br><br><br>
 {% endblock content %}

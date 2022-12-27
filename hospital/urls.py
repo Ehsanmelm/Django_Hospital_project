@@ -22,7 +22,25 @@ urlpatterns += [
     path('Accept-Appointment/<int:pk>', views.accept_appointment_view,
          name='accept_appointment')
 ]
+# ---------------------- Doctor-patient ------------------------
 
+urlpatterns += [
+    path("Doctor-Patient", views.doctor_patient, name='doctor_patient'),
+    path("Doctor-View-Patient", views.doctor_view_patient,
+         name='doctor_view_patient'),
+]
+
+# ---------------------- Discharging-Patient ------------------------
+
+urlpatterns += [
+    path("Discharge-patient", views.Discharging_patint_view,
+         name='discharge_patient'),
+    path("Discharge-Process/<int:pk>",
+         views.discharge_process_view.as_view(), name="discharge_process"),
+    path("Download-Bill/<int:code>", views.download_pdf_view, name='download_bill'),
+    path("View-Discharged-patient", views.view_discharged_patient_view,
+         name='view_discharged_patient'),
+]
 # ---------------------- patinet ------------------------
 urlpatterns += [
     path("Patient-Click", views.PatientClick, name='patient_click'),
@@ -38,4 +56,11 @@ urlpatterns += [
          name='book_appointment'),
     path("View-Appointment", views.pattinetViewAppointment,
          name='view_appointment'),
+]
+
+# -------------------------- paitent View Discharge Bill ------------------------
+
+urlpatterns += [
+    path("View_Discharge_Bill", views.Patient_View_Bill,
+         name='view_discharged_bill')
 ]

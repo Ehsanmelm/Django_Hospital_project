@@ -25,25 +25,26 @@
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 class="panel-title">Your Appointments</h6>
+      <h6 class="panel-title">Your Total Patient List</h6>
     </div>
     <table class="table table-hover" id="dev-table">
       <thead>
         <tr>
-          <th>Patient Name</th>
-          <th>Picture</th>
-          <th>Description</th>
+          <th>Name</th>
+          <th>Profile Picture</th>
+          <th>Symptoms</th>
           <th>Contact</th>
-          <th>Appointment Date</th>
+          <th>Address</th>
+
         </tr>
       </thead>
-      {% for a,p in appointments_info %}
+      {% for i in patient_list %}
       <tr>
-        <td>{{a.patient_name}}</td>
-        <td> <img src="{{p.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{a.description}}</td>
-        <td>{{p.mobile}}</td>
-        <td>{{a.date}}</td>
+        <td> {{i.patient_name}}</td>
+        <td> <img src="{{i.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{i.symptoms}}</td>
+        <td>{{i.mobile}}</td>
+        <td>{{i.address}}</td>
       </tr>
       {% endfor %}
     </table>

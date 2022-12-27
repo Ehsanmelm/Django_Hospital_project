@@ -1,4 +1,3 @@
-from dataclasses import fields
 from django import forms
 from .models import PatientModel, DoctorModel, AppointmentModel
 
@@ -26,7 +25,7 @@ class PatientSigninForm(forms.ModelForm):
     class Meta:
         model = PatientModel
         fields = '__all__'
-        exclude = ["doctor", "is_accepted"]
+        exclude = ["doctor", "is_accepted", "is_discharged"]
 
 
 class PatientLoginForm(forms.ModelForm):

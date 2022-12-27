@@ -314,7 +314,7 @@
       <li tabindex="0" class="icon-dashboard"> <a style="color:white; text-decoration:none;"
           href="{% url 'doctor_dashboard' %}"><span>Dashboard</span></a> </li>
       <li tabindex="0" class="icon-users"> <a style="color:white; text-decoration:none;"
-          href="/doctor-patient"><span>Patient</span></a></li>
+          href="{% url 'doctor_patient'%}"><span>Patient</span></a></li>
       <li tabindex="0" class="icon-calendar"> <a style="color:white; text-decoration:none;"
           href="{% url 'doctor_appointment' %}"><span>Appointments</span></a></li>
     </ul>
@@ -329,7 +329,6 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav" style=" margin-left: 90%;">
-
             <a href="{% url 'home_page'%}" class="nav-item nav-link">Logout</a>
           </div>
         </div>
