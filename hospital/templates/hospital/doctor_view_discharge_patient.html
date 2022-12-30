@@ -31,7 +31,7 @@
       <thead>
         <tr>
           <th>Name</th>
-
+          <th>image</th>
           <th>Admit Date</th>
           <th>Symptoms</th>
           <th>Contact</th>
@@ -42,7 +42,10 @@
       {% for p in discharged_patient_list %}
       <tr>
         <td> {{p.patient_name}}</td>
-
+        <td>{% if p.profile_pic%}
+          <img src="{{p.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" />
+          {%endif%}
+        </td>
         <td>{{p.admitDate}}</td>
         <td>{{p.symptoms}}</td>
         <td>{{p.mobile}}</td>

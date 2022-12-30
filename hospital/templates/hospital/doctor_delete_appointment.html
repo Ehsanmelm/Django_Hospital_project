@@ -25,7 +25,7 @@
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 class="panel-title">Delete Your Appointments</h6>
+      <h6 class="panel-title">Check Your Appointments</h6>
     </div>
     <table class="table table-hover" id="dev-table">
       <thead>
@@ -41,7 +41,10 @@
       {% for i,j in appointments_info %}
       <tr>
         <td>{{i.patient_name}}</td>
-        <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{% if j.profile_pic%}
+          <img src="{{j.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" />
+          {%endif%}
+        </td>
         <td>{{i.description}}</td>
         <td>{{i.date}}</td>
         <td><a class="btn btn-danger btn-xs" href="{% url 'deleting_appointment' i.id%}"><span

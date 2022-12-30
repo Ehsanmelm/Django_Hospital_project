@@ -23,10 +23,12 @@
         {% for a,p in appointment %}
         <tr>
           <td>{{a.patient_name}}</td>
-          <!-- <td> <img src=" static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td> -->
+          <td>{% if p.profile_pic%}
+            <img src="{{p.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" />
+            {%endif%}
+          </td>
           <td>{{a.description}}</td>
           <td>{{p.mobile}}</td>
-          <td>{{p.address}}</td>
           <td>{{a.date}}</td>
         </tr>
         {% endfor %}

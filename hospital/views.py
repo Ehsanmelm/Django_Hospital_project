@@ -110,7 +110,7 @@ def check_appointment_View(request):
     patinets_id = []
     for i in appointments:
         patinets_id.append(PatientModel.objects.get(
-            patient_name=i.patient_name, password=i.patient_pass).id)
+            patient_name=i.patient_name, password=i.patient_pass))
     appointments_info = zip(appointments, patinets_id)
     return render(request, 'hospital/doctor_delete_appointment.html', {"appointments_info": appointments_info})
 
@@ -167,7 +167,7 @@ class discharge_process_view(View):
 
         # }
         discharge_form = DischargePatientModel(patient_name=discharging_patient.patient_name, patient_pass=discharging_patient.password, todaydate=date.today(),
-                                               assigned_doctor_name=discharging_patient.doctor, mobile=discharging_patient.mobile, address=discharging_patient.address, symptoms=discharging_patient.symptoms, assigned_doctor_id=assigned_doctor)
+                                               assigned_doctor_name=discharging_patient.doctor, mobile=discharging_patient.mobile, address=discharging_patient.address, symptoms=discharging_patient.symptoms, assigned_doctor_id=assigned_doctor, profile_pic=discharging_patient.profile_pic)
         # discharge_form.sa
         discharge_form.save()
         return render(request, 'hospital/patient_generate_bill.html', {"discharge_form": discharge_form})
@@ -229,7 +229,9 @@ def download_pdf_view(request, code):
 
 
 def view_discharged_patient_view(request):
-    discharged_patient_list = DischargePatientModel.objects.all()
+    loged_doct_id = request.session.get("loged_Doctor_id")
+    discharged_patient_list = DischargePatientModel.objects.filter(
+        assigned_doctor_id=loged_doct_id)
     return render(request, "hospital/doctor_view_discharge_patient.html", {"discharged_patient_list": discharged_patient_list})
 
     # ----------------------------------------------------------

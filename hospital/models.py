@@ -65,6 +65,7 @@ class DischargePatientModel(models.Model):
     patient_name = models.CharField(max_length=255)
     patient_pass = models.CharField(max_length=255)
     patient_code = models.IntegerField(null=True)
+    profile_pic = models.ImageField(null=True)
     assigned_doctor_name = models.CharField(max_length=255)
     assigned_doctor_id = models.PositiveIntegerField(null=True)
     todaydate = models.DateField()

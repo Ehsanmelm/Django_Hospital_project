@@ -29,6 +29,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Image</th>
           <th>Symptoms</th>
           <th>Contact</th>
           <th>Discharge</th>
@@ -37,6 +38,10 @@
       {% for p in patients %}
       <tr>
         <td> {{p.patient_name}}</td>
+        <td>{% if p.profile_pic%}
+          <img src="{{p.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" />
+          {%endif%}
+        </td>
         <td>{{p.symptoms}}</td>
         <td>{{p.mobile}}</td>
         <td><a class="btn btn-danger btn-xs" href="{% url 'discharge_process' p.id  %}"><span

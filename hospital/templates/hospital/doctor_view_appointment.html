@@ -40,7 +40,10 @@
       {% for a,p in appointments_info %}
       <tr>
         <td>{{a.patient_name}}</td>
-        <td> <img src="{{p.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{% if p.profile_pic%}
+          <img src="{{p.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" />
+          {%endif%}
+        </td>
         <td>{{a.description}}</td>
         <td>{{p.mobile}}</td>
         <td>{{a.date}}</td>

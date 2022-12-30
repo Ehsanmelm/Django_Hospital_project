@@ -41,7 +41,11 @@
       {% for i in patient_list %}
       <tr>
         <td> {{i.patient_name}}</td>
-        <td> <img src="{{i.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{% if i.profile_pic%}
+          <img src="{{i.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" />
+          {%endif%}
+        </td>
+
         <td>{{i.symptoms}}</td>
         <td>{{i.mobile}}</td>
         <td>{{i.address}}</td>
