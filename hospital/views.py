@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import DoctorModel, PatientModel, AppointmentModel, DischargePatientModel
-from .forms import DoctorLoginForm, DoctorSigninForm, PatientSigninForm, PatientLoginForm, BookAppointmentForm
+from .models import DoctorModel, PatientModel, AppointmentModel, DischargePatientModel, FeedBack_Model
+from .forms import DoctorLoginForm, DoctorSigninForm, PatientSigninForm, PatientLoginForm, BookAppointmentForm, FeedBack_Form
 from datetime import date
 # Create your views here.
 
@@ -154,21 +154,9 @@ class discharge_process_view(View):
     def get(self, request, pk):
         discharging_patient = get_object_or_404(PatientModel, id=pk)
         assigned_doctor = request.session.get("loged_Doctor_id")
-        # admidate = AppointmentModel.objects.filter(
-        #     patient_name=discharging_patient.patient_name, patient_pass=discharging_patient.password)
-        # contex = {
-        #     # "admitDate": admidate,
-        #     "todayDate": date.today(),
-        #     "assignedDoctorName": discharging_patient.doctor,
-        #     "name": discharging_patient.patient_name,
-        #     "mobile": discharging_patient.mobile,
-        #     "address": discharging_patient.address,
-        #     "symptoms": discharging_patient.symptoms,
 
-        # }
         discharge_form = DischargePatientModel(patient_name=discharging_patient.patient_name, patient_pass=discharging_patient.password, todaydate=date.today(),
                                                assigned_doctor_name=discharging_patient.doctor, mobile=discharging_patient.mobile, address=discharging_patient.address, symptoms=discharging_patient.symptoms, assigned_doctor_id=assigned_doctor, profile_pic=discharging_patient.profile_pic)
-        # discharge_form.sa
         discharge_form.save()
         return render(request, 'hospital/patient_generate_bill.html', {"discharge_form": discharge_form})
 
@@ -194,31 +182,8 @@ class discharge_process_view(View):
         patient.is_discharged = True
         patient.save()
         discharging_patient.save()
-        # dis
-        # contex = {
-        #     "todayDate": date.today(),
-        #     "assignedDoctorName": discharging_patient.doctor,
-        #     "name": discharging_patient.patient_name,
-        #     "mobile": discharging_patient.mobile,
-        #     "address": discharging_patient.address,
-        #     "symptoms": discharging_patient.symptoms,
-        #     "roomCharge": request.POST['roomCharge'],
-        #     "medicineCost": request.POST['medicineCost'],
-        #     "doctorFee": request.POST['doctorFee'],
-        #     "OtherCharge": request.POST['OtherCharge'],
-        #     "total_price": total_price,
-        #     "patient_id": pk
 
-        # }
-        # discharging_patient.is_discharged = True
-        # discharging_patient.save()
-        # render(request, "hospital/download_bill.html", {"contex": contex})
         return render(request, "hospital/patient_final_bill.html", {"discharging_patient": discharging_patient})
-
-        # patient = get_object_or_404(PatientModel, id=pk)
-        # patient.is_discharged = True
-        # patient.save()
-        # return HttpResponseRedirect(reverse('discharge_patient'))
 
 
 def download_pdf_view(request, code):
@@ -296,9 +261,7 @@ class patientLoginView(View):
                         patient_related_doct = DoctorModel.objects.get(
                             Doct_name=loged_in_patient.doctor)
                         request.session["loged_patient_id"] = loged_in_patient.id
-
                         return HttpResponseRedirect(reverse('patient_dashboard'))
-                        # return render(request, "hospital/patient_dashboard.html", {"loged_in_patient": loged_in_patient, "patient_related_doct": patient_related_doct})
 
                     else:
                         return render(request, "hospital/patient_wait_for_approval.html", {"patient_name": i['patient_name']})
@@ -307,9 +270,6 @@ class patientLoginView(View):
 
 
 def patient_dashboard(request):
-    # loged_in_patient = request.session.get('patient_name')
-    # for i, j in request.session.items():
-    #     print(f"<< <<<<<< << {i , j} >> >>>>>>>>>> >")
     loged_patient_id = request.session.get("loged_patient_id")
     print(loged_patient_id)
     loged_in_patient = get_object_or_404(PatientModel, id=loged_patient_id)
@@ -347,3 +307,19 @@ def pattinetViewAppointment(request):
     appointments = AppointmentModel.objects.filter(
         patient_name=loged_patient.patient_name, patient_pass=loged_patient.password)
     return render(request, 'hospital/patient_view_appointment.html', {"appointments": appointments})
+
+
+# --------------------------------------------- FeedBack ---------------------------------------------
+
+class FeedBack_View(View):
+    def get(self, request):
+        form = FeedBack_Form()
+        return render(request, "hospital/feedback.html", {"form": form})
+
+    def post(self, request):
+        form = FeedBack_Form(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "hospital/feedbackssuccess.html", {"form": form})
+
+        return render(request, "hospital/feedback.html", {"form": form})

@@ -306,8 +306,8 @@
     <header class="avatar">
       <img src="{% static patient.profile_pic.url %}" alt="Profile Pic" />
       <br><br>
-      <h6>Patient</h6>
-      <h2>{{request.user.first_name}}</h2>
+      <h6>{{patient}}</h6>
+      <h2>{{request.user.patient_name}}</h2>
     </header>
     <ul>
       <li tabindex="0" class="icon-dashboard"> <a style="color:white; text-decoration:none;"

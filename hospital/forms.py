@@ -1,5 +1,5 @@
 from django import forms
-from .models import PatientModel, DoctorModel, AppointmentModel
+from .models import PatientModel, DoctorModel, AppointmentModel, FeedBack_Model
 
 # ------------ doctor related forms-------------
 
@@ -45,3 +45,9 @@ class BookAppointmentForm(forms.ModelForm):
         widgets = {
             'date': DateInput()
         }
+
+
+class FeedBack_Form(forms.ModelForm):
+    class Meta:
+        model = FeedBack_Model
+        fields = '__all__'

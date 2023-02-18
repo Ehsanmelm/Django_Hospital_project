@@ -64,3 +64,10 @@ urlpatterns += [
     path("View_Discharge_Bill", views.Patient_View_Bill,
          name='view_discharged_bill')
 ]
+
+
+# -------------------------- FeedBack ------------------------
+
+urlpatterns += [
+    path("FeedBack", views.FeedBack_View.as_view(), name='send_feedack')
+]

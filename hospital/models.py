@@ -77,3 +77,13 @@ class DischargePatientModel(models.Model):
     doctorFee = models.IntegerField(null=True)
     OtherCharge = models.IntegerField(null=True)
     total_price = models.IntegerField(null=True)
+
+
+class FeedBack_Model(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+
+    class Meta:
+        verbose_name = 'FeedBack'
+        verbose_name_plural = 'FeedBacks'
